@@ -12,14 +12,22 @@ export const supabaseAdmin = supabaseServiceKey
   ? createClient(supabaseUrl, supabaseServiceKey)
   : supabase;
 
+export type SupportedCrop =
+  | 'chilli' | 'cotton' | 'paddy'
+  | 'wheat' | 'maize' | 'groundnut'
+  | 'sugarcane' | 'soybean' | 'mustard' | 'onion';
+
 export type FarmerProfile = {
   id?: string;
   name: string;
   phone?: string;
+  state: string;
+  district: string;
   village: string;
-  crop: 'chilli' | 'cotton' | 'paddy';
+  crop: SupportedCrop;
   growth_stage: string;
   field_size_acres: number;
+  language: string;
   location_lat: number;
   location_lon: number;
   created_at?: string;
@@ -32,7 +40,7 @@ export type AdviceHistory = {
   weather_snapshot: Record<string, unknown>;
   soil_snapshot: Record<string, unknown>;
   price_snapshot: Record<string, unknown>;
-  advice_telugu: string;
+  advice_telugu: string;   // kept as field name; stores advice in farmer's language
   advice_english: string;
   action_taken?: boolean;
 };
